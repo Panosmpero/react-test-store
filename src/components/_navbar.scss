@@ -1,0 +1,39 @@
+@import "../global";
+
+/* 
+========== NAVBAR ==========
+*/
+
+.navbar {
+  background-color: $blue;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+  border-bottom: 2px $lightBlue solid;
+  height: 5rem;
+}
+
+.navbar-el {
+  font-size: 1.5rem;
+  padding: 0.75rem;
+  margin: 0.6rem;
+  border: none;
+  transition: linear 0.3s;
+  color: $lightBlue;
+  cursor: pointer;
+  &:hover {
+    color: $white;
+    transform: translate(0, 5%);
+  }
+}
+
+.nav-cart-link {
+  margin-left: auto;
+  user-select: none;
+  i {
+    padding-right: 0.5rem;
+  }
+}

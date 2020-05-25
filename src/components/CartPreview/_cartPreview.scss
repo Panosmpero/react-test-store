@@ -1,0 +1,68 @@
+@import "../../global";
+/* 
+========== MINI-CART DROPDOWN ========== 
+    check styled components too
+*/
+
+.cart-preview-wrapper {
+  h4 {
+    user-select: none;
+  }
+  p {
+    margin-left: 0.5rem;
+    user-select: none;
+  }
+  h3 {
+    text-align: center;
+  }
+  .mini-total {
+    position: sticky;
+    bottom: 0;
+    border-top: 1px $dark solid;
+    border-bottom: 1px $dark solid;
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.5rem;
+    background: $white;
+  }
+  .move-to-cart-btn {
+    width: 100%;
+    outline: none;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    color: $lightBlue;
+    border: none;
+    &:hover {
+      background: $lightBlue;
+      color: $white;
+    }
+  }
+  .cart-mini {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1px;
+    align-items: center;
+    /*    ========== ALMOST scaled image inside container ==========    */
+    img {
+      width: 60%;
+      height: 60%;
+      object-fit: scale-down;
+    }
+    i {
+      margin-left: auto;
+      margin-right: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 50%;
+      border: none;
+      color: $red;
+      cursor: pointer;
+      &:hover {
+        background: $red;
+        color: $white;
+      }
+    }
+  }
+}

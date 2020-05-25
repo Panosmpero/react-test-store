@@ -1,0 +1,72 @@
+@import "../global";
+
+
+/* 
+========== FOOTER ==========
+*/
+
+.footer-container {
+  box-sizing: border-box;
+  width: 100%;
+  height: 22rem;
+  background: $blue;
+  color: $lightBlue;
+  font-size: 1.2rem;
+  line-height: 1rem;
+  letter-spacing: 0.5px;
+  padding: 0.5rem;
+
+  .footer-wrapper {
+    max-width: 60vw;
+    margin: auto;
+  }
+  .footer-caption {
+    color: $white;
+  }
+  .footer-caption,
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px $lightBlue solid;
+
+    h6 {
+      cursor: pointer;
+      transition: 0.2s ease-out;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+  .info {
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    max-width: 60vw;
+
+    #code {
+      opacity: 0;
+      transition: 0.5s ease-out;
+    }
+
+    a:hover {
+      color: $white;
+      #code {
+        opacity: 1;
+      }
+    }
+
+    .social-wrapper {
+      font-size: 1.4rem;
+
+      display: flex;
+      .social {
+        margin-left: 1rem;
+        &:hover {
+          color: $white;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
