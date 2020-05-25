@@ -97,6 +97,7 @@ input::-webkit-inner-spin-button {
 */
 .cart-container {
   margin: auto;
+  margin-top: 4rem;
   padding: 1rem;
   text-align: center;
   display: -webkit-box;
@@ -948,7 +949,6 @@ input::-webkit-inner-spin-button {
           justify-content: center;
   margin: 1rem;
   margin-top: 5rem;
-  height: calc(100vh-28rem);
 }
 
 .products-wrapper {
@@ -1155,7 +1155,7 @@ input::-webkit-inner-spin-button {
 ========== DETAILS ==========
 */
 .details-container {
-  margin-top: 5rem;
+  margin-top: 4rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
