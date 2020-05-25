@@ -41,7 +41,6 @@ const ProductContextProvider = ({ children }) => {
   };
   
   useEffect(() => {
-    console.log("test")
     initalProductsState()
     setProducts({ ...products })
   }, [])

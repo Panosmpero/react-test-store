@@ -3,8 +3,8 @@ import styled from "styled-components";
 const CartPreviewContainer = styled.div`
   position: fixed;
   right: 0;
-  width: 25vw;
-  max-height: 400px;
+  width: 30vw;
+  max-height: 35vh;
   display: flex;
   justify-content: flex-end;
   overflow: hidden;

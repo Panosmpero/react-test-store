@@ -560,6 +560,7 @@ input::-webkit-inner-spin-button {
 .cart-container .total .grand-total {
   font-weight: bolder;
   border-top: 2px #232528 solid;
+  margin-bottom: 1rem;
 }
 
 /* 
