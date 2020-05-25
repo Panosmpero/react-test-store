@@ -43,6 +43,7 @@ const ProductContextProvider = ({ children }) => {
   useEffect(() => {
     initalProductsState()
     setProducts({ ...products })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
