@@ -5,8 +5,11 @@
 @import "./components/navbar";
 @import "./components/product";
 @import "./components/details";
+@import "./components/filterPrice";
 
-
+.filter-container {
+  margin-top: 5rem;
+}
 
 /* 
 ========== @MEDIA ==========
@@ -66,6 +69,16 @@
         display: none;
       }
     }
+  }
+  .filter-container {
+    min-width: 0;
+    width: 70%;
+  }
+
+  .footer-container {
+    height: 100%;
+    margin-top: auto;
+    bottom: 0;
   }
 }
 

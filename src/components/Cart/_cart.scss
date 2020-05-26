@@ -6,7 +6,6 @@
 
 .cart-container {
   margin: auto;
-  margin-top: 4rem;
   padding: 1rem;
   text-align: center;
   display: flex;
@@ -15,6 +14,7 @@
   justify-content: center;
   max-width: 60vw;
   height: 100vh;
+  margin-top: 5rem;
 
   .caption {
     display: grid;

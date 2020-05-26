@@ -3,10 +3,13 @@ import { storeProducts } from "../data";
 
 export const ProductContext = createContext();
 
-const ProductContextProvider = ({ children }) => {
+// get min, max product price
+const minRange = storeProducts.reduce((a,b) => {return a>=b.price ? b.price : a}, 0);
+const maxRange = storeProducts.reduce((a,b) => {return a<=b.price ? b.price : a}, 0);
 
-  const initialProducts = { storeProducts }  
+const ProductContextProvider = ({ children }) => {
   
+  const initialProducts = { storeProducts }  
   const [products, setProducts] = useState(initialProducts);
 
   // prevent detail crushing on refresh by using local storage
@@ -20,6 +23,12 @@ const ProductContextProvider = ({ children }) => {
   const [modal, setModal] = useState(false);
   const [modalProduct, setModalProduct] = useState(detail);
   const [showCart, setShowCart] = useState(false);
+  const [slider, setSlider] = useState({
+    "valueA": minRange, 
+    "valueB": maxRange,
+    "rangeLeft" : 0,
+    "rangeRight": 0
+  })
 
   useEffect(() => {
     localStorage.setItem("detail", JSON.stringify(detail));
@@ -106,13 +115,16 @@ const ProductContextProvider = ({ children }) => {
     product.inCart = false;
   };
 
+  // increase / decrease product quantity on /cart 
   const handleClick = (id, e) => {
     const product = cart.find((el) => el.id === id);
     product.count = e === "-" ? product.count - 1 : product.count + 1;
+    // failsafe for negative/zero quantity
     product.count = product.count > 0 ? product.count : 1; 
     setCart([...cart]);
   };
 
+  // final price with tax included
   const sum = () => {
     return cart.length > 0
       ? cart
@@ -121,11 +133,36 @@ const ProductContextProvider = ({ children }) => {
       : 0;
   };
 
+  // set custom product quantity with input
   const handleChange = (id, e) => {
     const product = cart.find((el) => el.id === id);
-    product.count = e > 0 ? Number(e) : Number(1)
-    setCart([...cart])
-  }
+    product.count = e > 0 ? Number(e) : Number(1);
+    setCart([...cart]);
+  };
+
+  // price filter on products home page
+  const filterPrice = (e) => {
+    if (e.id === "slider-A") slider.valueA = Math.min(e.value, slider.valueB - 1);
+    if (e.id === "slider-B") slider.valueB = Math.max(e.value, slider.valueA + 1);
+
+    const storeProducts = initialProducts.storeProducts.filter(product => {
+      return product.price >= slider.valueA && product.price <= slider.valueB
+    });
+    // update thumbs, range, tooltip
+    const updateSlider = () => {
+  
+      let percentA = ((slider.valueA - minRange) / (maxRange - minRange)) * 100;
+      let percentB = ((slider.valueB - minRange) / (maxRange - minRange)) * 100;    
+  
+      slider.rangeLeft = percentA;
+      slider.rangeRight = 100 - percentB;
+      
+      setSlider({...slider})
+    };
+
+    setProducts({storeProducts});
+    updateSlider();
+  };  
   
 
   return (
@@ -146,7 +183,12 @@ const ProductContextProvider = ({ children }) => {
         removeItem,
         handleClick,
         sum,
-        handleChange
+        handleChange,
+        filterPrice,
+        slider,
+        setSlider,
+        minRange,
+        maxRange
       }}
     >
       {children}

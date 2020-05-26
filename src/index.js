@@ -14,6 +14,7 @@ import ProductContextProvider from "./context/ProductContext";
 6. useReducer on context
 7. FIXED - Add controlled input on final cart
    FIXED(uuid kept giving new keys) - new - input cursor loses focus
+8. Add product filters + search
 */
 
 ReactDOM.render(

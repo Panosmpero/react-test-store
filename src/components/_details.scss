@@ -5,13 +5,13 @@
 */
 
 .details-container {
-  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: 1s ease-in;
-  height: 100vh;
+  min-height: 100vh;
+  margin-top: 5rem;
 
   .details-wrapper {
     display: flex;

@@ -43,7 +43,7 @@ const Footer = () => {
             rel="noopener noreferrer"
           >
             <span id="code">&lt;</span>
-            <i className="fab fa-github"></i>
+            <i className="fab fa-github"></i>{" "}
             <span id="code">&#47;&gt;</span>
           </a>
           <div className="social-wrapper">
