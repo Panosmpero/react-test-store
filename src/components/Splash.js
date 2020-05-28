@@ -16,11 +16,11 @@ const Splash = () => {
           <h1 className="header-title">Mobile Phone Company</h1>
           <div className="header-text">The Best Mobiles</div>
         </div>
-        <div className="splash-button">
-          <Link to="/products" className="link-style">
+        <Link to="/products" className="link-style">
+          <div className="splash-button">
             Visit Our Products <i className="fas fa-chevron-right"></i>
-          </Link>
-        </div>
+          </div>
+        </Link>
       </div>
     </>
   );

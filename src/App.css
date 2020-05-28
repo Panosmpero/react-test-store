@@ -115,7 +115,6 @@ input::-webkit-inner-spin-button {
   max-width: 60vw;
   height: 100vh;
   margin-bottom: 12rem;
-  margin-top: 5rem;
 }
 
 .cart-container .caption {
@@ -1186,7 +1185,6 @@ input::-webkit-inner-spin-button {
   -webkit-transition: 1s ease-in;
   transition: 1s ease-in;
   min-height: 100vh;
-  margin-top: 5rem;
 }
 
 .details-container .details-wrapper {
@@ -1813,30 +1811,30 @@ input::-webkit-inner-spin-button {
   font-style: italic;
 }
 
-#banner .splash-button {
+#banner .link-style {
+  color: inherit;
+  text-decoration: none;
   cursor: pointer;
   position: absolute;
   z-index: 3;
   bottom: 1%;
+}
+
+#banner .link-style .splash-button {
   padding: 1rem;
   font-size: 1.2rem;
   border-radius: 15px;
   border: 2px #f3f3f3 solid;
   color: #f3f3f3;
-  -webkit-transition: .2s ease-out;
-  transition: .2s ease-out;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
 }
 
-#banner .splash-button .link-style {
-  color: inherit;
-  text-decoration: none;
-}
-
-#banner .splash-button:hover {
+#banner .link-style .splash-button:hover {
   background-color: #19c9ff;
   color: #21215c;
   border-color: #21215c;
@@ -1846,7 +1844,7 @@ input::-webkit-inner-spin-button {
           box-shadow: 0px 2px 5px #19c9ff;
 }
 
-#banner .splash-button:active {
+#banner .link-style .splash-button:active {
   -webkit-box-shadow: none;
           box-shadow: none;
   -webkit-transform: translate(0, 5%) scale(1.1);
@@ -1879,7 +1877,7 @@ input::-webkit-inner-spin-button {
   position: absolute;
   top: 0;
   left: 0;
-  opacity: .5;
+  opacity: 0.5;
   z-index: 1;
 }
 

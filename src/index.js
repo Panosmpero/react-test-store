@@ -12,10 +12,11 @@ import ScrollToTop from "./ScrollToTop";
 3. FIXED(syntax) - context clearCart() return with commas
 4. FIXED(forgot setState) - cart quantity state doesn't update unless I click Links
 5. navbar cart icon transition starts after parent's
-6. useReducer on context
+6. may not use in this project - useReducer on context
 7. FIXED - Add controlled input on final cart
    FIXED(uuid kept giving new keys) - new - input cursor loses focus
-8. 1/2 FIXED - Add product filters + search
+8. 2/2 FIXED - Add product filters + search
+   new - tag and search form stay one state back...
 9. FIXED - fix cart images
 10. FIXED - scroll top after Link transitions
 */
