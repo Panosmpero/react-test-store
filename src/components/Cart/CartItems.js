@@ -15,7 +15,9 @@ const CartItems = () => {
         cart.map(({img, id, title, price, count, total}) => {
           return (
             <div className="cart-wrapper" key={title+id}>
-              <img src={img} alt="product" />
+              <div className="cart-img-wrapper">
+                <img src={img} alt="product" />
+              </div>
 
               <Link to="/details">
                 <div onClick={() => handleDetail(id)}>

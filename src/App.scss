@@ -5,11 +5,8 @@
 @import "./components/navbar";
 @import "./components/product";
 @import "./components/details";
-@import "./components/filterPrice";
-
-.filter-container {
-  margin-top: 5rem;
-}
+@import "./components/Filters/filter";
+@import "./components/splash";
 
 /* 
 ========== @MEDIA ==========

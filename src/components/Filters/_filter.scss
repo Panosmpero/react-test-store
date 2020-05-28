@@ -1,0 +1,130 @@
+@import "../../global";
+@import "./price";
+
+.filter-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  width: 6vw;
+  min-width: 100px;
+  cursor: pointer;
+}
+
+.button {
+  cursor: pointer;
+  outline: none;
+  border-radius: 10px;
+  padding: 0.3rem;
+  margin: 0.2rem;
+  font-size: 1rem;
+  color: $blue;
+  border: 2px $blue solid;
+  background: $lightBlue;
+  box-shadow: 0.5px 0.5px 4px $dark;
+  &:active {
+    transform: translate(0, 4%);
+    box-shadow: none;
+  }
+}
+
+.filters-container {
+  position: relative;
+  padding: 0 1rem 1rem;
+  width: 60vw;
+  min-width: 150px;
+  border: 2px $blue solid;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .filtered-count {
+    background-color: $lightBlue;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    border-radius: 10px;
+    color: $dark;
+    padding: 0.5rem;
+    text-decoration: underline;
+  }
+
+  // =========== MANUFACTURER ===========
+  .manufacturer-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 150px;
+    width: 40%;
+    height: auto;
+    padding: 0.5rem;
+
+    i {
+      font-size: 1.5rem;
+    }
+
+    .manufacturers {
+      display: flex;
+      flex-wrap: wrap;
+      flex-basis: 45%;
+      border: 1.5px $blue solid;
+      border-radius: 10px;
+      text-align: start;
+      min-height: 25px;
+      background: $white;
+      i {
+        display: none;
+      }
+      button:hover {
+        transform: translate(0, -5%);
+        i {
+          display: inherit;
+          color: $red;
+          font-size: 1rem;
+          font-weight: 800;
+          transform: translate(0, -25%);
+        }
+      }
+    }
+  }
+  .reset-filter {
+    cursor: pointer;
+    font-size: 1.4rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border: 2px $dark solid;
+    border-radius: 15px;
+    color: $dark;
+    background: $red;
+    transition: 0.3s ease-out;
+
+    &:hover {
+      box-shadow: 0 0 10px 5px $red;
+      transform: scale(1.1);
+    }
+  }
+}
+
+// fake opacity background image from css-tricks!
+.filters-container::after {
+  background-color: rgba(112, 128, 144, 0.527);
+  content: "";
+  // Image from "https://www.pngwing.com/en/free-png-zxtsl"
+  background-image: url("/img/magnifing.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  opacity: 0.2;
+}

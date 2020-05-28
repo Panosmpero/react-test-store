@@ -9,7 +9,7 @@ const maxRange = storeProducts.reduce((a,b) => {return a<=b.price ? b.price : a}
 
 const ProductContextProvider = ({ children }) => {
   
-  const initialProducts = { storeProducts }  
+  const initialProducts = { storeProducts };  
   const [products, setProducts] = useState(initialProducts);
 
   // prevent detail crushing on refresh by using local storage
@@ -23,13 +23,20 @@ const ProductContextProvider = ({ children }) => {
   const [modal, setModal] = useState(false);
   const [modalProduct, setModalProduct] = useState(detail);
   const [showCart, setShowCart] = useState(false);
-  const [slider, setSlider] = useState({
+  const [showFilter, setShowFilter] = useState(false);
+
+  const sliderInitialState = {
     "valueA": minRange, 
     "valueB": maxRange,
     "rangeLeft" : 0,
     "rangeRight": 0
-  })
+  };
+  const [slider, setSlider] = useState(sliderInitialState);
 
+  const uniqueManufacturers = [...new Set(initialProducts.storeProducts.map(x => x.company))];
+  const [manufacturers, setManufacturers] = useState(uniqueManufacturers);
+  const [sortedManufacturers, setSortedManufacturers] = useState([]);
+  
   useEffect(() => {
     localStorage.setItem("detail", JSON.stringify(detail));
   }, [detail]);
@@ -140,14 +147,21 @@ const ProductContextProvider = ({ children }) => {
     setCart([...cart]);
   };
 
-  // price filter on products home page
-  const filterPrice = (e) => {
+  // Open / close filter
+  const openCloseFilter = () => {
+    setShowFilter(!showFilter);
+  };  
+
+  // FILTER
+  const filterProducts = (e, addTag=false, removeTag=false) => {
+
+    let storeProducts = initialProducts.storeProducts;
+   
+    // ======== SLIDERS ======== 
+    // Sliders overlap prevention
     if (e.id === "slider-A") slider.valueA = Math.min(e.value, slider.valueB - 1);
     if (e.id === "slider-B") slider.valueB = Math.max(e.value, slider.valueA + 1);
 
-    const storeProducts = initialProducts.storeProducts.filter(product => {
-      return product.price >= slider.valueA && product.price <= slider.valueB
-    });
     // update thumbs, range, tooltip
     const updateSlider = () => {
   
@@ -157,13 +171,59 @@ const ProductContextProvider = ({ children }) => {
       slider.rangeLeft = percentA;
       slider.rangeRight = 100 - percentB;
       
-      setSlider({...slider})
+      setSlider({...slider});
     };
 
-    setProducts({storeProducts});
+    // Filter with slider price range
+    storeProducts = storeProducts.filter(product => {
+      return product.price >= slider.valueA && product.price <= slider.valueB
+    });
     updateSlider();
-  };  
-  
+    
+    // ======== TAGS ======== 
+    // Manufacturer add tag 
+    if (addTag) {
+      const manuf = manufacturers.filter(manuf => manuf !== e.id);
+      setSortedManufacturers([...sortedManufacturers, e.id]);
+      setManufacturers(manuf);    
+      addTag = false
+    };
+
+    // Manufacturer remove tag 
+    if (removeTag)  {
+      const manuf = sortedManufacturers.filter(manuf => manuf !== e.id);
+      setSortedManufacturers(manuf);
+      setManufacturers([...manufacturers, e.id]);
+      removeTag = false
+    };
+
+    // Filter with tags if there are tags
+    if (sortedManufacturers.length > 0) {
+      storeProducts = storeProducts.filter(product => {
+        return sortedManufacturers.includes(product.company);
+      });
+    };
+
+    // UPDATE state
+    setProducts({storeProducts});
+
+  }; 
+
+  // Sort ascending / descending by price
+  const priceSort = (value) => {
+    const storeProducts = value === "ascending" 
+      ? products.storeProducts.sort((a,b) => a.price - b.price)
+      : products.storeProducts.sort((a,b) => b.price - a.price);
+    setProducts({storeProducts});    
+  };
+
+  // RESET filter
+  const resetFilter = () => {
+    setSlider(sliderInitialState);
+    setProducts(initialProducts);
+    setManufacturers(uniqueManufacturers);
+    setSortedManufacturers([]);
+  }; 
 
   return (
     <ProductContext.Provider
@@ -184,11 +244,17 @@ const ProductContextProvider = ({ children }) => {
         handleClick,
         sum,
         handleChange,
-        filterPrice,
         slider,
         setSlider,
         minRange,
-        maxRange
+        maxRange,
+        openCloseFilter,
+        showFilter,
+        filterProducts,
+        priceSort,
+        manufacturers,
+        sortedManufacturers,
+        resetFilter        
       }}
     >
       {children}

@@ -9,6 +9,7 @@ import Default from "./components/Default";
 import Modal from "./components/Modal";
 import CartPreview from "./components/CartPreview/CartPreview";
 import Footer from "./components/Footer";
+import Splash from "./components/Splash";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
       <CartPreview />
       <Modal />
       <Switch>
-        <Route exact path="/" component={ProductList} />
+        <Route exact path="/" component={Splash} />
+        <Route path="/products" component={ProductList} />
         <Route path="/details" component={Details} />
         <Route path="/cart" component={Cart} />
         <Route component={Default} />

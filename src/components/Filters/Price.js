@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { ProductContext } from "../context/ProductContext";
+import { ProductContext } from "../../context/ProductContext";
 import styled from "styled-components";
 
 const Filter = () => {
-  const { filterPrice, slider, minRange, maxRange } = useContext(
+  const { filterProducts, slider, minRange, maxRange } = useContext(
     ProductContext
-  );
+  );  
 
   return (
-    <div className="filter-container">
-      <h1>Select Price Range</h1>
+    <div className="range-filter">
+      <h2>Select Price Range</h2>
       <div className="slider-wrapper">
         <div className="multi-range-slider">
           <input
@@ -18,7 +18,7 @@ const Filter = () => {
             min={minRange}
             max={maxRange}
             step="1"
-            onChange={(e) => filterPrice(e.target)}
+            onChange={(e) => filterProducts(e.target)}
             value={slider.valueA}
           />
           <input
@@ -27,7 +27,7 @@ const Filter = () => {
             min={minRange}
             max={maxRange}
             step="1"
-            onChange={(e) => filterPrice(e.target)}
+            onChange={(e) => filterProducts(e.target)}
             value={slider.valueB}
           />
           <div className="slider">
@@ -94,7 +94,7 @@ const Tip = styled.div`
 
   transform: translate(
     ${props => props.tip === "A" ? "-27px, -65px" : "27px, -65px"}
-  )
-`
+  );
+`;
 
 export default Filter;
