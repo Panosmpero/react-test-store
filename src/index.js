@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import ProductContextProvider from "./context/ProductContext";
+import ScrollToTop from "./ScrollToTop";
 
 /*
 1. FIXED(div) - click on empty space around image procs Link withou procing state
@@ -15,12 +16,14 @@ import ProductContextProvider from "./context/ProductContext";
 7. FIXED - Add controlled input on final cart
    FIXED(uuid kept giving new keys) - new - input cursor loses focus
 8. 1/2 FIXED - Add product filters + search
-9. fix cart images
+9. FIXED - fix cart images
+10. FIXED - scroll top after Link transitions
 */
 
 ReactDOM.render(
   <ProductContextProvider>
     <Router>
+      <ScrollToTop />
       <App />
     </Router>
   </ProductContextProvider>,
