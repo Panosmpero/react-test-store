@@ -3,7 +3,7 @@ import { ProductContext } from "../../context/ProductContext";
 import styled from "styled-components";
 
 const Filter = () => {
-  const { filterProducts, slider, minRange, maxRange } = useContext(
+  const { updateSlider, slider, minRange, maxRange } = useContext(
     ProductContext
   );  
 
@@ -18,7 +18,7 @@ const Filter = () => {
             min={minRange}
             max={maxRange}
             step="1"
-            onChange={(e) => filterProducts(e.target)}
+            onChange={(e) => updateSlider(e.target)}
             value={slider.valueA}
           />
           <input
@@ -27,7 +27,7 @@ const Filter = () => {
             min={minRange}
             max={maxRange}
             step="1"
-            onChange={(e) => filterProducts(e.target)}
+            onChange={(e) => updateSlider(e.target)}
             value={slider.valueB}
           />
           <div className="slider">

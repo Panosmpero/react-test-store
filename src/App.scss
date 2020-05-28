@@ -22,11 +22,19 @@
   .quantity-check {
     flex-direction: column-reverse;
   }
+  #banner {
+    #main-header {
+      width: 100%;
+    }
+  }
 }
 
 @media (max-width: 768px) {
   .cart-container {
     max-width: 80vw;
+  }
+  .slider-wrapper {
+    margin-top: 6rem;
   }
 }
 

@@ -5,7 +5,7 @@ const Manufacturer = () => {
   const {
     manufacturers,
     sortedManufacturers,
-    filterProducts  
+    updateManufacturers  
   } = useContext(ProductContext);
 
   return (
@@ -19,7 +19,7 @@ const Manufacturer = () => {
                 <button
                   id={m}
                   className="button"
-                  onClick={(e) => filterProducts(e.currentTarget, true, false)}
+                  onClick={(e) => updateManufacturers(e.currentTarget)}
                 >
                   {m}
                 </button>
@@ -35,7 +35,7 @@ const Manufacturer = () => {
                 <button
                   id={m}
                   className="button"
-                  onClick={(e) => filterProducts(e.currentTarget, false, true)}
+                  onClick={(e) => updateManufacturers(e.currentTarget, false)}
                 >
                   {m} <i className="far fa-times-circle" />
                 </button>

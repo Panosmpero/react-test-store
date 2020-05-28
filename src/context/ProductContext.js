@@ -33,9 +33,12 @@ const ProductContextProvider = ({ children }) => {
   };
   const [slider, setSlider] = useState(sliderInitialState);
 
+  // get all brand tags
   const uniqueManufacturers = [...new Set(initialProducts.storeProducts.map(x => x.company))];
   const [manufacturers, setManufacturers] = useState(uniqueManufacturers);
   const [sortedManufacturers, setSortedManufacturers] = useState([]);
+  const [search, setSearch] = useState("");
+  const [searchFocus, setSearchFocus] = useState(false);
   
   useEffect(() => {
     localStorage.setItem("detail", JSON.stringify(detail));
@@ -57,10 +60,10 @@ const ProductContextProvider = ({ children }) => {
   };
   
   useEffect(() => {
-    initalProductsState()
-    setProducts({ ...products })
+    initalProductsState();
+    setProducts({ ...products });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
 
   // universal function for finding a product
@@ -100,7 +103,7 @@ const ProductContextProvider = ({ children }) => {
     setModalProduct(product);
     setModal(true);
     setTimeout(() => {
-      setModal(false);
+      closeModal();
     }, 2000);
   };
 
@@ -145,58 +148,13 @@ const ProductContextProvider = ({ children }) => {
     const product = cart.find((el) => el.id === id);
     product.count = e > 0 ? Number(e) : Number(1);
     setCart([...cart]);
-  };
-
-  // Open / close filter
-  const openCloseFilter = () => {
-    setShowFilter(!showFilter);
   };  
 
-  // FILTER
-  const filterProducts = (e, addTag=false, removeTag=false) => {
+  // ====== FILTER ====== 
+  const multiFilter = () => {
 
-    let storeProducts = initialProducts.storeProducts;
-   
-    // ======== SLIDERS ======== 
-    // Sliders overlap prevention
-    if (e.id === "slider-A") slider.valueA = Math.min(e.value, slider.valueB - 1);
-    if (e.id === "slider-B") slider.valueB = Math.max(e.value, slider.valueA + 1);
-
-    // update thumbs, range, tooltip
-    const updateSlider = () => {
-  
-      let percentA = ((slider.valueA - minRange) / (maxRange - minRange)) * 100;
-      let percentB = ((slider.valueB - minRange) / (maxRange - minRange)) * 100;    
-  
-      slider.rangeLeft = percentA;
-      slider.rangeRight = 100 - percentB;
-      
-      setSlider({...slider});
-    };
-
-    // Filter with slider price range
-    storeProducts = storeProducts.filter(product => {
-      return product.price >= slider.valueA && product.price <= slider.valueB
-    });
-    updateSlider();
+    let storeProducts = initialProducts.storeProducts;   
     
-    // ======== TAGS ======== 
-    // Manufacturer add tag 
-    if (addTag) {
-      const manuf = manufacturers.filter(manuf => manuf !== e.id);
-      setSortedManufacturers([...sortedManufacturers, e.id]);
-      setManufacturers(manuf);    
-      addTag = false
-    };
-
-    // Manufacturer remove tag 
-    if (removeTag)  {
-      const manuf = sortedManufacturers.filter(manuf => manuf !== e.id);
-      setSortedManufacturers(manuf);
-      setManufacturers([...manufacturers, e.id]);
-      removeTag = false
-    };
-
     // Filter with tags if there are tags
     if (sortedManufacturers.length > 0) {
       storeProducts = storeProducts.filter(product => {
@@ -204,10 +162,61 @@ const ProductContextProvider = ({ children }) => {
       });
     };
 
+    // Filter with search keywords
+    if (searchFocus || search.length > 0) {
+      let regX = new RegExp(search, "gi")
+      storeProducts = storeProducts.filter(product => {
+        return regX.test(product.title) || regX.test(product.company) || regX.test(product.info)
+      });
+    };
+    
+    // Filter with slider price range    
+    storeProducts = storeProducts.filter(product => {
+      return product.price >= slider.valueA && product.price <= slider.valueB
+    }); 
+
     // UPDATE state
     setProducts({storeProducts});
+  };
 
-  }; 
+  // Open / close filter
+  const openCloseFilter = () => {
+    setShowFilter(!showFilter);
+  };  
+
+  // ======== SLIDERS ======== 
+  const updateSlider = (e) => {
+    // Sliders overlap prevention
+    if (e.id === "slider-A") slider.valueA = Math.min(e.value, slider.valueB - 1);
+    if (e.id === "slider-B") slider.valueB = Math.max(e.value, slider.valueA + 1);
+
+    // update thumbs, range, tooltip  
+    let percentA = ((slider.valueA - minRange) / (maxRange - minRange)) * 100;
+    let percentB = ((slider.valueB - minRange) / (maxRange - minRange)) * 100;    
+
+    slider.rangeLeft = percentA;
+    slider.rangeRight = 100 - percentB;
+    setSlider({...slider});    
+    multiFilter();
+  };
+
+  // ======== TAGS ======== 
+  const updateManufacturers = (e, addTag=true) => {
+    // Manufacturer add tag 
+    if (addTag) {
+      const manuf = manufacturers.filter(manuf => manuf !== e.id);
+      setSortedManufacturers([...sortedManufacturers, e.id]);
+      setManufacturers(manuf);    
+    };
+
+    // Manufacturer remove tag 
+    if (!addTag)  {
+      const manuf = sortedManufacturers.filter(manuf => manuf !== e.id);
+      setSortedManufacturers(manuf);
+      setManufacturers([...manufacturers, e.id]);
+    };
+    multiFilter();
+  };
 
   // Sort ascending / descending by price
   const priceSort = (value) => {
@@ -217,12 +226,24 @@ const ProductContextProvider = ({ children }) => {
     setProducts({storeProducts});    
   };
 
+  const updateInput = (value) => {
+    setSearch(value);
+    multiFilter();
+  };
+  
+  const changeFocus = () => {
+    setSearchFocus(!searchFocus);
+  };
+  
+
   // RESET filter
   const resetFilter = () => {
     setSlider(sliderInitialState);
     setProducts(initialProducts);
     setManufacturers(uniqueManufacturers);
     setSortedManufacturers([]);
+    setSearch("");
+    setSearchFocus(false);
   }; 
 
   return (
@@ -248,12 +269,16 @@ const ProductContextProvider = ({ children }) => {
         setSlider,
         minRange,
         maxRange,
+        updateSlider,
         openCloseFilter,
-        showFilter,
-        filterProducts,
+        showFilter,        
         priceSort,
         manufacturers,
         sortedManufacturers,
+        updateManufacturers,
+        search,
+        updateInput,
+        changeFocus,
         resetFilter        
       }}
     >

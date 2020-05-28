@@ -53,6 +53,7 @@
     color: $dark;
     padding: 0.5rem;
     text-decoration: underline;
+    margin-bottom: -0.4rem;
   }
 
   // =========== MANUFACTURER ===========
@@ -79,16 +80,14 @@
       min-height: 25px;
       background: $white;
       i {
-        display: none;
+        font-size: 1rem;
       }
       button:hover {
         transform: translate(0, -5%);
         i {
-          display: inherit;
+          visibility: visible;
           color: $red;
-          font-size: 1rem;
           font-weight: 800;
-          transform: translate(0, -25%);
         }
       }
     }
@@ -107,6 +106,23 @@
     &:hover {
       box-shadow: 0 0 10px 5px $red;
       transform: scale(1.1);
+    }
+  }
+  .search-container {
+    margin-bottom: 1rem;
+
+    input[type=text] {
+      margin-top: 0.5rem;
+      border: 1.5px $blue solid;
+      color: $blue;
+      font-size: 1.2rem;
+      padding: 0.3rem;
+      border-radius: 15px;
+      font-style: italic;
+      outline: none;
+      &:focus {
+        box-shadow: 0 0 15px 2px $lightBlue;
+      }
     }
   }
 }
