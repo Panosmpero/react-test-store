@@ -2,17 +2,14 @@ import React, { useContext } from "react";
 import { ProductContext } from "../../context/ProductContext";
 
 const Sort = () => {
-  const { priceSort, products } = useContext(ProductContext);
+  const { priceSort } = useContext(ProductContext);
 
   return (
     <>
       <h2>Select Price Sort</h2>
       <div className="sort-filter">
         <button
-          onClick={(e) => {
-            priceSort(e.currentTarget.value);
-            console.log(products);
-          }}
+          onClick={(e) => priceSort(e.currentTarget.value)}
           value="ascending"
           className="button"
         >

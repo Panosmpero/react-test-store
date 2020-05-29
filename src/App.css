@@ -1616,6 +1616,7 @@ input[type=range]::-webkit-slider-thumb {
   background: #fc1e1e;
   -webkit-transition: 0.3s ease-out;
   transition: 0.3s ease-out;
+  outline: none;
 }
 
 .filters-container .reset-filter:hover {

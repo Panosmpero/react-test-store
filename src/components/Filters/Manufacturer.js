@@ -3,8 +3,7 @@ import { ProductContext } from "../../context/ProductContext";
 
 const Manufacturer = () => {
   const {
-    manufacturers,
-    sortedManufacturers,
+    filter,
     updateManufacturers  
   } = useContext(ProductContext);
 
@@ -13,7 +12,7 @@ const Manufacturer = () => {
       <h2>Select Manufacturers</h2>
       <div className="manufacturer-filter">
         <div className="manufacturers">
-          {manufacturers.map((m, i) => {
+          {filter.manufacturers.map((m, i) => {
             return (
               <div className="button-wrapper" key={m + i}>
                 <button
@@ -29,7 +28,7 @@ const Manufacturer = () => {
         </div>
         <i className="fas fa-angle-double-right" />
         <div className="manufacturers f-manufacturers">
-          {sortedManufacturers.map((m, i) => {
+          {filter.sortedManufacturers.map((m, i) => {
             return (
               <div className="button-wrapper" key={m + i}>
                 <button

@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Splash = () => {
+
+  // change css on load
   useEffect(() => {
     document.getElementById("banner").className = "banner";
     Object.assign(document.getElementById("main-header").style, {
@@ -9,6 +11,7 @@ const Splash = () => {
       opacity: "1",
     });
   }, []);
+
   return (
     <>
       <div id="banner">

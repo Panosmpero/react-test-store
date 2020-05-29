@@ -3,7 +3,7 @@ import { ProductContext } from "../../context/ProductContext";
 import styled from "styled-components";
 
 const Filter = () => {
-  const { updateSlider, slider, minRange, maxRange } = useContext(
+  const { updateSlider, filter, minRange, maxRange } = useContext(
     ProductContext
   );  
 
@@ -19,7 +19,7 @@ const Filter = () => {
             max={maxRange}
             step="1"
             onChange={(e) => updateSlider(e.target)}
-            value={slider.valueA}
+            value={filter.slider.valueA}
           />
           <input
             id="slider-B"
@@ -28,18 +28,18 @@ const Filter = () => {
             max={maxRange}
             step="1"
             onChange={(e) => updateSlider(e.target)}
-            value={slider.valueB}
+            value={filter.slider.valueB}
           />
           <div className="slider">
             <div className="track"></div>
             <Range
-              rangeLeft={slider.rangeLeft + "%"}
-              rangeRight={slider.rangeRight + "%"}
+              rangeLeft={filter.slider.rangeLeft + "%"}
+              rangeRight={filter.slider.rangeRight + "%"}
             />
-            <Tip tip="A" range={slider.rangeLeft + "%"}>{slider.valueA} €</Tip>
-            <Tip tip="B" range={slider.rangeRight + "%"}>{slider.valueB} €</Tip>
-            <Thumb thumb="A" range={slider.rangeLeft + "%"} />
-            <Thumb thumb="B" range={slider.rangeRight + "%"} />
+            <Tip tip="A" range={filter.slider.rangeLeft + "%"}>{filter.slider.valueA} €</Tip>
+            <Tip tip="B" range={filter.slider.rangeRight + "%"}>{filter.slider.valueB} €</Tip>
+            <Thumb thumb="A" range={filter.slider.rangeLeft + "%"} />
+            <Thumb thumb="B" range={filter.slider.rangeRight + "%"} />
           </div>
         </div>
       </div>

@@ -102,6 +102,7 @@
     color: $dark;
     background: $red;
     transition: 0.3s ease-out;
+    outline: none;
 
     &:hover {
       box-shadow: 0 0 10px 5px $red;

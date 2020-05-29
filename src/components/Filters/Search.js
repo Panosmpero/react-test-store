@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { ProductContext } from "../../context/ProductContext";
 
 const Search = () => {
-  const { search, updateInput, changeFocus } = useContext(ProductContext);
+  const { filter, updateInput } = useContext(ProductContext);
 
   return (
     <div className="search-container">
@@ -10,10 +10,8 @@ const Search = () => {
       <input
         type="text"
         placeholder="Enter Search Keywords..."
-        value={search}
-        onChange={(e) => updateInput(e.target.value)}
-        onFocus={() => changeFocus()}
-        onBlur={() => changeFocus()}
+        value={filter.search}
+        onChange={(e) => updateInput(e.target.value.toLowerCase())}
       />
     </div>
   );
