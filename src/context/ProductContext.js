@@ -131,6 +131,8 @@ const ProductContextProvider = ({ children }) => {
     // update the inCart status so that user can add again if he wishes
     const product = getItem(id);
     product.inCart = false;
+    product.count = 0;
+    product.total = 0;
   };
 
   // increase / decrease product quantity on /cart
